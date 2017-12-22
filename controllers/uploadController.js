@@ -15,9 +15,10 @@ let getAllMusics = (req, res) => {
   res.send('UPLOAD')
 }
 
-let createMusics = (req, res, next) => {
-  console.log(req.body)
-  console.log(req.file)
+let createMusic = (req, res, next) => {
+  console.log('GA KESINI', req.body)
+  console.log('IMAGES',req.files.image[0])
+  console.log('MUSIC', req.files.music[0])
   // console.log('LOKASI',req.body.longitude);
   // console.log('LOKASI',req.body.latitude);
   // console.log('URL PENTING',req.file.cloudStoragePublicUrl);
@@ -61,7 +62,7 @@ let createMusics = (req, res, next) => {
 // }
 
 module.exports = {
-  createMusics,
+  createMusic,
   getAllMusics,
   // deletemusics,
   // updatemusics

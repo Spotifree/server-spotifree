@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "even-aloe-186714",
+  "private_key_id": "3a53705b1df9b22e112e2637f442a99d55b03965",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDCP3umLSczAYdr\nRsCs7DFw7a4DBBgo1QKaMqpXURjfE1KKWjg0WRMgnB91YnL4ukSag20B2pt3smG1\nk2ah2mvkIY47pCPYqBB67L1Vyv/XfOV15pc0aD05xlZknIwkFX0TW0eMzvXTTOA4\nu4ZsD2arncQar0SKF33qu0ID7Itk5njtYRUDj2haA3r3KaNuVHZytXmrweqJfIrn\nY1QVgdOA+qpP3ywvOTdxym1hMp9z+lNsuHbzxHmq4xjIEszP89BldkpISliTRrmZ\n98bjPO9+1K1UUxbi/T/SIQeMWrBQ9vVgbjq835GJCExCS/3ofILkM2qJGXmB1f03\nZW16Fd+zAgMBAAECggEAVr1kaLtHAtbO8s+AYHeESGpKRxx/8VPVOqgfOqiDE7Ic\nLJ3G9VFFYk11GsTglEMROXIwriBBRj0Itr1gmivf+9okGmvcefXqjgnDLllcz4v9\nJx3WLVfS50ay83CYf9B8rrUXCUCtszJj+dF7YCusbDwiAsx7LbL5zmTaQMhTIrWj\nwqCALzanrFNNu5RQvTaSIE6Ci2KcVqrkaHYu7VTkxZ/oLNuUiyC0Q9NrcC0DDQSh\nP5vOwuB81NUwwztzzzThIBoai7LrcZZ5lMtWeTuLQJpwDT+czEBgv3UDJTwKmqmV\n13APbVBp/nx2aybR51DxHPNoyiIX3CeYtCEv4UDlcQKBgQD4PHQZRykE0SH3BLCn\nwtp5z/baCdgWgm8WzLejWnVoMYC9PCaSLHxeemcZ0fXz1FhVekTBH/jSw16GdUPk\nYEQWUHWimXYZOd275ZAvBeCudPa0gMTePro9uuymLS0Ve3l/XpbVgx7Z4aGo3mpA\nxhwUZP9o0UJvxIoWewGXzWPhWQKBgQDIUsODK2i3d/RUw2smd6uTBsJ7imO857Lu\no1+v9xFVnti1aLclX0AsLZmV9S2dHGc/yd8Ds6DTdkv8j1uLJ4DoE81YKOYDP5ry\niBb7NO7Vjgv6mJ3nx5DTyDKrVvreru3EhGRmZP5rrnKSJKbU5oSSuwhSviygB9lF\n+VX4NNq76wKBgQDfQ4AoPBhofLBPu6gnOtnFNYaQFMqFdEr19qo0AegXDm77xF3s\nmpZBY1XXoz/TTekk+BNen6Lr7UvXIyEtBmg2qacj12KgzarglFhZ8q9iOVCqiCaI\nvWJEoxq1W2xxJdzg8fI3lvbogEcl2uU13PjkXvJZE9ztKZgJIBkOr2xmAQKBgCoI\n8+26VibpjOOcfgd8ZQxdBsJVr8gb9ngM4C9UcNa+lkq6xnOZISYkC25kHEYzh5bj\nDWEBeGXnFNrSWitBBtOsFBLDwkA8QI9T7z6XROaa//h9veS9A67s+3Tos4u2uT3b\nahXya1C9Ml1oQ3m5RWhkxsJWFZcfDoCYaWnD7YIxAoGAK8f+YJmTsUhPk5LBZ06O\nkbUBojR7SAVMtzjXO6FBKiSU+PtOT8HCJmreTDD6QpPPkLEIctZj65seIEU8RL3o\nU+J/cwxLHi8tigwGEtjUyTz3hKBxENjJSuSsXiIfL1j6gk28q6DAPvRSguXTK4FX\n2yVT7kod3wDG5+U+QbNJD/E=\n-----END PRIVATE KEY-----\n",
+  "client_email": "spotifree@even-aloe-186714.iam.gserviceaccount.com",
+  "client_id": "112963662798872261028",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/spotifree%40even-aloe-186714.iam.gserviceaccount.com"
+}

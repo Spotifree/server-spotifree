@@ -1,11 +1,11 @@
 const path = require('path');
 const Storage = require('@google-cloud/storage');
-const CLOUD_BUCKET = 'storage-jepretgram';
+const CLOUD_BUCKET = 'jepretgram-vnx';
 const Multer = require('multer')
 
 const storage = Storage({
   projectId: 'ecommerce',
-  keyFilename: 'keygoogle.json'
+  keyFilename: 'keyjson.json'
 })
 
 const bucket = storage.bucket(CLOUD_BUCKET);
@@ -15,32 +15,58 @@ const getPublicUrl = filename => {
 }
 
 const sendUploadToGCS = (req, res, next) => {
-  console.log('INI DI HELPER', req.files)
   if (!req.files) {
+    console.log('EROOOOOOOOOOOOOOOOOOR')
     return next()
   }
-  const gcsnameImage = Date.now() + req.files.image.originalname
-  const fileImage = bucket.file(gcsnameImage)
-  const gcsnameMusic = Date.now() + req.files.music.originalname
+  const gcsname = Date.now() + req.files.image[0].originalname
+  const fileImage = bucket.file(gcsname)
+  const gcsnameMusic = Date.now() + req.files.music[0].originalname
   const fileMusic = bucket.file(gcsnameMusic)
-
+  console.log('__________________________', gcsname, gcsnameMusic)
   const stream = fileImage.createWriteStream({
     metadata: {
-      contentType: req.files.image.mimetype
+      contentType: req.files.image[0].mimetype
     }
   })
+  
+  
+  //IMAGE
   stream.on('error', (err) => {
-    req.files.image.cloudStorageError = err
+    console.log(err)
+    req.files.image[0].cloudStorageError = err
     next(err)
   })
   stream.on('finish', () => {
-    req.files.images.cloudStorageObject = gcsnameImage
-    file.makePublic().then(() => {
-      req.file.cloudStoragePublicUrl = getPublicUrl(gcsnameImage)
-      next()
+    req.files.image[0].cloudStorageObject = gcsname
+    fileImage.makePublic().then(() => {
+      req.files.image[0].cloudStoragePublicUrl = getPublicUrl(gcsname)
+      uploadMusic()
     })
   })
-  stream.end(req.files.image.buffer)
+  stream.end(req.files.image[0].buffer)
+  uploadMusic = () => {
+    //MUSIC
+    const streamMusic = fileMusic.createWriteStream({
+      metadata: {
+        contentType: req.files.music[0].mimetype
+      }
+    })
+    streamMusic.on('error', (err) => {
+      console.log(err)
+      req.files.music[0].cloudStorageError = err
+      next(err)
+    })
+    streamMusic.on('finish', () => {
+      req.files.music[0].cloudStorageObject = gcsnameMusic
+      fileMusic.makePublic().then(() => {
+        req.files.music[0].cloudStoragePublicUrl = getPublicUrl(gcsnameMusic)
+        next()
+      })
+    })
+    streamMusic.end(req.files.music[0].buffer)
+  }
+  console.log('SAMPAI AKHIR')
 }
 
 const multer = Multer({
@@ -49,6 +75,7 @@ const multer = Multer({
     fileSize: 10 * 1024 * 1024
   },
   fileFilter: function (req, file, cb) {
+    console.log('DI MULTER', file)
     let filetypes = /jpeg|jpg|png|mp3/;
     let mimetype = filetypes.test(file.mimetype);
     let extname = filetypes.test(path.extname(file.originalname).toLowerCase());

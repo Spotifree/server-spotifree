@@ -21,6 +21,7 @@ router.post('/', (req, res, next) => {
   
 }, 
 musics.sendUploadToGCS, (req, res, next) => {
+  console.log('SIAP SAVE')
   Music.createMusic(req, res, next)
 });
 // router.delete('/:id', Music.deleteMusic);
