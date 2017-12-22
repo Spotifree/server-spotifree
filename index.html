@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Upload Music</title>
+    <link href="https://fonts.googleapis.com/css?family=Muli|Quicksand|Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <style>
+        #tile {
+          height:150px;
+          text-align:center;
+          background-repeat:repeat-x;
+          background-position:0 100px;
+ }
+    </style>
+  </head>
+  <body>
+    <!-- NAVIGATION -->
+    <div class="tabs is-centered is-boxed is-medium">
+      <ul>
+        <li>
+          <span class="title">Spotifree <i class="fa fa-weibo fa-2x"></i> Music</span>
+        </li>
+      </ul>
+    </div>
+    <div id="Musics">
+      <div class="tile is-vertical is-10">
+        <div class="tile is-parent">
+          <article class="tile is-child notification is-dark">
+            <div class="content" v-for="img in allmusics">
+              <figure class="snip1190">
+                <img :src="img.url" alt="Musics"/>
+                <figcaption>
+                  <p>
+                    <a class="button is-info" @click="deleteMusics(img._id)">Delete</a>
+                  </p>
+                </figcaption>
+              </figure>
+            </div>
+          </article>
+        </div>
+      </div>
+      <div class="tile is-parent">
+        <article class="tile is-child notification is-danger">
+          <form v-on:submit.prevent="createMusic">
+            <div class="field is-horizontal">
+              <div class="field-body">
+                <div class="field">
+                  <div class="control">
+                    <div class="field">
+                      <label class="label">Title</label>
+                      <input class="input" type='text' v-model="title" placeholder="insert title"><br><br>
+                      <label class="label">Genre</label>
+                      <input class="input" type='text' v-model="genre" placeholder="insert genre"><br><br>
+                      <label class="label">Artist</label>
+                      <input class="input" type='text' v-model="artist" placeholder="insert artist"><br><br>
+                      <label class="label">Select thumbnail</label>
+                      <div v-if="!image">
+                        <div class="file is-dark">
+                          <label class="file-label">
+                            <input class="file-input" name="file" id="file" type="file" @change="onFileChange">
+                            <span class="file-cta">
+                              <span class="file-icon">
+                                <i class="fa fa-upload"></i>
+                              </span>
+                              <span class="file-label">
+                                Choose thumbnail…
+                              </span>
+                            </span>
+                          </label>
+                        </div>
+                        <br/>
+                      </div>
+                      <div v-else>
+                        <img id="tile" class="small":src="image" />
+                        <br><br>
+                      </div>
+                      <label class="label">Select music</label>
+                      <div v-if="!music">
+                          
+                          <div class="file is-dark">
+                            <label class="file-label">
+                              <input class="file-input" name="file" id="file" type="file" @change="onFileChangeMusic">
+                              <span class="file-cta">
+                                <span class="file-icon">
+                                  <i class="fa fa-upload"></i>
+                                </span>
+                                <span class="file-label">
+                                  Choose music…
+                                </span>
+                              </span>
+                            </label>
+                          </div>
+                          <br/>
+                        </div>
+                        <div v-else>
+                          <span>{{music}}</span>
+                          <br><br>
+                        </div>
+                      <input class="button is-dark" type="submit" value="Save" name="submit"/>
+                      <button class="button is-danger" @click="removeImage">Reset</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </form>
+        </article>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.8/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.js"></script>
+    <script type="text/javascript">
+      new Vue(
+      {
+        el: '#Musics',
+        data: {
+          title: '',
+          genre: '',
+          artist: '',
+          allmusics: [],
+          image: '',
+          music: '',
+          resultUpload: null,
+          resultUploadMusic: null,
+        },
+        methods: {
+          deleteMusics(id){
+            axios.delete(`http://localhost:3000/${id}`)
+            .then(res=>{
+              console.log('HASIL HAPUS',res)
+            })
+            .catch(err=>{
+              console.log(err)
+            })
+          },
+          onFileChange(e) {
+            console.log(e.target.files)
+            let files = e.target.files || e.dataTransfer.files
+
+            if (!files.length) {
+              return
+            }
+            this.resultUpload = files[0]
+            let image = new Image()
+            let reader = new FileReader()
+            let vm = this
+
+            reader.onload = (e) => {
+              vm.image = e.target.result
+            }
+            reader.readAsDataURL(this.resultUpload)
+          },
+          onFileChangeMusic(e) {
+            let files = e.target.files || e.dataTransfer.files
+            if (!files.length) {
+              return
+            }
+            this.resultUploadMusic = files[0]
+            this.music = e.target.files[0].name
+          },
+          createMusic(file) {
+            let data = new FormData()
+            data.append('title', this.title)
+            data.append('genre', this.genre)
+            data.append('artist', this.artist)
+            data.append('image', this.resultUpload)
+            data.append('music', this.resultUploadMusic)
+            console.log('INI AKAN DI KIRIM', data)
+            axios.post('http://localhost:3000/upload', data)
+            .then((res)=> {
+              console.log('HASIL KIRIM',res)
+            })
+            .catch((err) =>{
+              console.log(err)
+            })
+          },
+          removeImage(){
+            this.image = null
+            this.title = ''
+            this.music = null
+            this.genre = ''
+            this.artist = ''
+          },
+          say(url) {
+            this.url = url
+            console.log(url)
+            return this.active = true
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
