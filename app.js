@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const logger = require('morgan');
 const path = require('path');
 const cors = require('cors')
+require('dotenv').config()
 
 const index = require('./routes/index');
 const upload = require('./routes/upload');

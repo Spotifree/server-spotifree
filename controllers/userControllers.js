@@ -13,7 +13,32 @@ module.exports = {
     })
   },
   login (req, res) {
-
+    User.findOne({username: req.body.username})
+    .then(user => {
+      bcrypt.compare(req.body.password, user.password)
+      .then(response => {
+        let dataUser = {
+          id: user._id,
+          username: user.username,
+          first_name: user.first_name,
+          last_name: user.last_name,
+          email: user.email
+        }
+        jwt.sign(dataUser, process.env.SECRET_JWT, function(err, token) {
+          if(!err) {
+            res.send({
+              token: token
+            })
+          }
+        });
+      });
+    })
+    .catch(err => {
+      res.send({
+        status: 'incorrect username/password',
+        err: err
+      })
+    })
   },
   signup (req, res) {
     bcrypt.hash(req.body.password, 10)
