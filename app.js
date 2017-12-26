@@ -10,7 +10,7 @@ const index = require('./routes/index');
 const upload = require('./routes/upload');
 const users = require('./routes/users')
 
-const mongoose = require('mongoose').connect('mongodb://localhost/spotifree');
+const mongoose = require('mongoose').connect('mongodb://localhost/spotifree', { useMongoClient: true });
 
 app.use(cors())
 app.use(logger('dev'));

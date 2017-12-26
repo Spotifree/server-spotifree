@@ -9,9 +9,10 @@ module.exports = {
       res.send(users)
     })
     .catch(err => {
-      res.send(err)
+      res.status(500).send(err)
     })
   },
+
   login (req, res) {
     User.findOne({username: req.body.username})
     .then(user => {
@@ -34,29 +35,53 @@ module.exports = {
       });
     })
     .catch(err => {
-      res.send({
+      res.status(401).send({
         status: 'incorrect username/password',
         err: err
       })
     })
   },
+
   signup (req, res) {
     bcrypt.hash(req.body.password, 10)
     .then(function(hash) {
       req.body.password = hash
       User.create(req.body)
       .then(user => {
-        res.send(user)
+        res.send({
+          status: 'User data created',
+          data: user
+        })
       })
       .catch(err => {
-        res.send(err)
+        res.status(500).send(err)
       })
     });
   },
+
   update (req, res) {
-
+    User.findByIdAndUpdate(req.params.id, {$set: req.body}, {new: true})
+    .then(user => {
+      res.send({
+        status: 'User data updated.',
+        data: user
+      })
+    })
+    .catch(err => {
+      res.status(500).send(err)
+    })
   },
-  remove (req, res) {
 
+  remove (req, res) {
+    User.findByIdAndRemove(req.params.id)
+    .then(user => {
+      res.send({
+        status: 'User data deleted.',
+        data: user
+      })
+    })
+    .catch(err => {
+      res.status(500).send(err)
+    })
   }
 }
