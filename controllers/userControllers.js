@@ -13,6 +13,16 @@ module.exports = {
     })
   },
 
+  getById (req, res) {
+    User.findById(req.params.id)
+    .then(user => {
+      res.send(user)
+    })
+    .catch(err => {
+      res.status(500).send(err)
+    })
+  },
+
   login (req, res) {
     User.findOne({username: req.body.username})
     .then(user => {
@@ -28,7 +38,7 @@ module.exports = {
         jwt.sign(dataUser, process.env.SECRET_JWT, function(err, token) {
           if(!err) {
             res.send({
-              token: token
+              access_token: token
             })
           }
         });
