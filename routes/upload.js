@@ -1,11 +1,11 @@
 const router = require('express').Router()
-const Music =  require('../controllers/uploadController')
-const musics = require('../helpers/upload')
+const musicControllers =  require('../controllers/uploadController')
+const musicHelper = require('../helpers/upload')
 const Multer = require('multer')
-const upload = musics.multer.fields([{ name: 'image', maxCount: 1 }, { name: 'music', maxCount: 8 }])
-// const uploadImage = musics.multer.single('image');
+const upload = musicHelper.multer.fields([{ name: 'image', maxCount: 1 }, { name: 'music', maxCount: 8 }])
+// const uploadImage = musicHelper.multer.single('image');
 /* GET Musics listing. */
-router.get('/',  Music.getAllMusics);
+router.get('/',  musicControllers.getAllMusics);
 router.post('/', (req, res, next) => {
   console.log('MASUK')
   upload(req, res, function (err) {
@@ -20,9 +20,9 @@ router.post('/', (req, res, next) => {
   });
   
 }, 
-musics.sendUploadToGCS, (req, res, next) => {
+musicHelper.sendUploadToGCS, (req, res, next) => {
   console.log('SIAP SAVE')
-  Music.createMusic(req, res, next)
+  musicControllers.createMusic(req, res, next)
 });
 // router.delete('/:id', Music.deleteMusic);
 // router.put('/:id',  Music.updateMusic);

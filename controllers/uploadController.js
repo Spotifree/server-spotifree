@@ -1,7 +1,7 @@
 // const mongoose = require('mongoose').connect('mongodb://vbagustinus:anakjalanan@smartshop-shard-00-00-hibsb.mongodb.net:27017,smartshop-shard-00-01-hibsb.mongodb.net:27017,smartshop-shard-00-02-hibsb.mongodb.net:27017/Musics?ssl=true&replicaSet=smartshop-shard-0&authSource=admin');
 // const mongoose = require('mongoose').connect('mongodb://localhost:27017/Musics');
 const ObjectId = require('mongodb').ObjectID;
-const Musics = require('../models/modelMusic');
+const Musics = require('../models/musicModel');
 
 let getAllMusics = (req, res) => {
   Musics.find()
