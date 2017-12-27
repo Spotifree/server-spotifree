@@ -10,7 +10,7 @@ const index = require('./routes/index');
 const upload = require('./routes/upload');
 const users = require('./routes/users')
 
-const mongoose = require('mongoose').connect('mongodb://localhost/spotifree', { useMongoClient: true });
+const mongoose = require('mongoose').connect('mongodb://vinnixdb:ShadowFax5@cluster0-shard-00-00-b8rmh.mongodb.net:27017,cluster0-shard-00-01-b8rmh.mongodb.net:27017,cluster0-shard-00-02-b8rmh.mongodb.net:27017/spotifree?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin', { useMongoClient: true });
 
 app.use(cors())
 app.use(logger('dev'));

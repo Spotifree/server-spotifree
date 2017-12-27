@@ -76,7 +76,7 @@ const multer = Multer({
   },
   fileFilter: function (req, file, cb) {
     console.log('DI MULTER', file)
-    let filetypes = /jpeg|jpg|png|mp3/;
+    let filetypes = /jpeg|jpg|png|mp3|mpeg/;
     let mimetype = filetypes.test(file.mimetype);
     let extname = filetypes.test(path.extname(file.originalname).toLowerCase());
 
