@@ -6,15 +6,13 @@ const upload = musicHelper.multer.fields([{ name: 'image', maxCount: 1 }, { name
 
 module.exports = {
   getAll (req, res) {
-    Musics.find()
-    .then(datamusics => {
-      console.log(datamusics);
-      res.send(datamusics)
+    Music.find()
+    .then(musics => {
+      res.send(musics)
     })
     .catch( err => {
-      console.log(err);
+      res.send(err)
     })
-    res.send('UPLOAD')
   },
 
   upload (req, res, next) {
@@ -45,6 +43,18 @@ module.exports = {
     .catch(err => {
       res.status(500).send(err)
     })
-  }
+  },
 
+  remove (req, res) {
+    Music.findByIdAndRemove(req.params.id)
+    .then(user => {
+      res.send({
+        status: 'music deleted.',
+        data: user
+      })
+    })
+    .catch(err => {
+      res.status(500).send(err)
+    })
+  }
 } 
